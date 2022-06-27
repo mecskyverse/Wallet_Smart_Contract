@@ -7,4 +7,9 @@ contract walle_allot{
     constructor() {
         owner=msg.sender;
     }    
+    function allowances(uint money,address _this) public {
+        require(msg.sender==owner,"YOu are not the owner");
+        money = money*1 ether;
+        allowance[_this]=money;
+    }
 }
