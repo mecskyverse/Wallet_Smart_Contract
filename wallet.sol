@@ -1,6 +1,10 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 contract walle_allot{
-    mapping(uint=>address) Mymapping;
     
+    mapping(address=>uint) allowance;
+    address owner;
+    constructor() {
+        owner=msg.sender;
+    }    
 }
