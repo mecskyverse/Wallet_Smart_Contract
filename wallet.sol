@@ -35,4 +35,7 @@ contract walle_allot{
         return allowance[msg.sender];
 
     }  
+    function balance() public view returns(uint){
+        return address(this).balance;
+    } 
 }
