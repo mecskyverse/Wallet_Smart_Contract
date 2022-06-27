@@ -13,4 +13,21 @@ contract walle_allot{
         allowance[_this]=money;
     }
     function deposit() public payable {}
+    
+    function withdrawal(address payable _to,uint _amount) public{
+            _amount=_amount*1 ether;
+        if(msg.sender==owner){
+            require(_amount<=address(this).balance,"Not enough funds");
+            
+            _to.transfer(_amount);
+
+        }
+        else {
+            require(allowance[msg.sender]>=_amount,"Amount is more than your allowance");
+            
+            allowance[msg.sender]-=_amount;
+            _to.transfer(_amount);
+
+        }
+    }
 }
