@@ -12,7 +12,7 @@ contract walle_allot{
         money = money*1 ether;
         allowance[_this]=money;
     }
-    function deposit() public payable {}
+    receive() external payable{}
 
     function withdrawal(address payable _to,uint _amount) public{
             _amount=_amount*1 ether;
