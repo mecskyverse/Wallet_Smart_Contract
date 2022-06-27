@@ -13,7 +13,7 @@ contract walle_allot{
         allowance[_this]=money;
     }
     function deposit() public payable {}
-    
+
     function withdrawal(address payable _to,uint _amount) public{
             _amount=_amount*1 ether;
         if(msg.sender==owner){
@@ -30,4 +30,9 @@ contract walle_allot{
 
         }
     }
+    function allowancebalance() public view returns(uint)
+    {
+        return allowance[msg.sender];
+
+    }  
 }
