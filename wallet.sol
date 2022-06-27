@@ -12,4 +12,5 @@ contract walle_allot{
         money = money*1 ether;
         allowance[_this]=money;
     }
+    function deposit() public payable {}
 }
