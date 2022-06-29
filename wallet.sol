@@ -20,13 +20,16 @@ contract walle_allot{
 
         }
 
+          function reduce_allowance(address _who,uint _amount) internal{
+            
+
+            allowance[msg.sender]-=_amount;
+    }
+
     function withdrawal(address payable _to,uint _amount) public ownerorAllowed{
             _amount=_amount*1 ether;
         if(!_checkOwner()){
-            require(_amount<=address(this).balance,"Not enough funds");
-            
-            allowance[msg.sender]-=_amount;
-            _to.transfer(_amount);
+            reduce_allowance(msg.sender,_amount);
             }
         
             _to.transfer(_amount);
