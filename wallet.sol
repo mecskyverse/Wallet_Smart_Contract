@@ -1,16 +1,16 @@
-//SPDX-License-Identifier: UNLICENSED
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/08d109d87725e36dce92db28c7a74bb49bde38ae/contracts/access/Ownable.sol";
+
 contract walle_allot{
     
     mapping(address=>uint) allowance;
-    address owner;
-    constructor() {
-        owner=msg.sender;
-    }    
-    function allowances(uint money,address _this) public {
-        require(msg.sender==owner,"YOu are not the owner");
-        money = money*1 ether;
-        allowance[_this]=money;
+       
+    function allowances(address _who,uint _amount) public {
+        require(_checkOwner(),"you are not the owner");
+        _amount = _amount*1 ether;
+        allowance[_this]=_amount;
     }
     receive() external payable{}
 
