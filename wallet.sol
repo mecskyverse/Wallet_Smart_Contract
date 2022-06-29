@@ -7,8 +7,12 @@ contract walle_allot{
     
     mapping(address=>uint) allowance;
        
+    event allowancechanged(address indexed _for,address indexed _by,uint _oldamount,uint _newamount);
+
+
     function allowances(address _who,uint _amount) public {
         require(_checkOwner(),"you are not the owner");
+         emit allowancechanged(_who,msg.sender,allowance[_who],_amount);
         _amount = _amount*1 ether;
         allowance[_who]=_amount;
     }
@@ -21,8 +25,8 @@ contract walle_allot{
         }
 
           function reduce_allowance(address _who,uint _amount) internal{
-            
-
+        
+        emit allowancechanged(_who,msg.sender,allowance[_who],allowance[_who]-_amount);
             allowance[msg.sender]-=_amount;
     }
 
