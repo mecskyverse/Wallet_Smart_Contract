@@ -37,6 +37,9 @@ contract Miniwallet is Allowance
      event moneysent(address indexed _beneficiary, uint amount);
     event moneyreceived(address indexed From , uint amount);
 
+    function renounceOwnership() public override pure{
+        revert("Cannot change Ownership");
+     }
 
 
     function withdrawal(address payable _to,uint _amount) public ownerorAllowed(_amount){
