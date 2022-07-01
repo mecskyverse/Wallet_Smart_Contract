@@ -3,8 +3,10 @@ pragma solidity ^0.8.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/08d109d87725e36dce92db28c7a74bb49bde38ae/contracts/access/Ownable.sol";
 
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol";
+
 contract Allowance is Ownable{
-    
+    using SafeMath for uint;
     mapping(address=>uint) allowance;
        
     event allowancechanged(address indexed _for,address indexed _by,uint _oldamount,uint _newamount);
@@ -27,7 +29,7 @@ contract Allowance is Ownable{
     function reduce_allowance(address _who,uint _amount) internal{
         
     emit allowancechanged(_who,msg.sender,allowance[_who],allowance[_who]-_amount);
-            allowance[msg.sender]-=_amount;
+    allowance[_who]=allowance[_who].sub(_amount);
     }
 }
 contract Miniwallet is Allowance
