@@ -32,15 +32,23 @@ contract Allowance is Ownable{
 }
 contract Miniwallet is Allowance
 {
+     event moneysent(address indexed _beneficiary, uint amount);
+    event moneyreceived(address indexed From , uint amount);
+
+
+
     function withdrawal(address payable _to,uint _amount) public ownerorAllowed(_amount){
     _amount=_amount*1 ether;
     if(!_checkOwner()){
             reduce_allowance(msg.sender,_amount);
             }
-        
+            emit moneysent(_to,_amount);
             _to.transfer(_amount);
     }
-    receive() external payable{}
+    receive() external payable{
+        emit moneyreceived(msg.sender,msg.value);
+
+    }
 
     function allowancebalance() public view returns(uint)
     {
