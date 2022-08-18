@@ -1,12 +1,14 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@OpenZeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "@OpenZeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Allowance is Ownable {
     using SafeMath for uint;
+
+    address public _owner;
     mapping(address => uint) allowance;
 
     event allowancechanged(
@@ -16,8 +18,11 @@ contract Allowance is Ownable {
         uint _newamount
     );
 
-    function allowances(address _who, uint _amount) public {
-        require(_checkOwner(), "you are not the owner");
+    constructor() {
+        _owner = msg.sender;
+    }
+
+    function allowances(address _who, uint _amount) public onlyOwner {
         emit allowancechanged(_who, msg.sender, allowance[_who], _amount);
         _amount = _amount * 1 ether;
         allowance[_who] = _amount;
@@ -25,7 +30,7 @@ contract Allowance is Ownable {
 
     modifier ownerorAllowed(uint _amount) {
         require(
-            _checkOwner() || allowance[msg.sender] >= _amount,
+            msg.sender == _owner || allowance[msg.sender] >= _amount,
             "You are not allowed"
         );
         _;
@@ -55,7 +60,7 @@ contract Miniwallet is Allowance {
         ownerorAllowed(_amount)
     {
         _amount = _amount * 1 ether;
-        if (!_checkOwner()) {
+        if (msg.sender != _owner) {
             reduce_allowance(msg.sender, _amount);
         }
         emit moneysent(_to, _amount);
