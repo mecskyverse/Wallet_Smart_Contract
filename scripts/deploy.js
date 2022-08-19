@@ -11,6 +11,7 @@ async function main() {
   console.log("Deploying the smart contract.....");
   const Wallet = await Walletfactory.deploy();
   await Wallet.deployed();
+  console.log(`Smart contract deployed at ${Wallet.address}`);
 }
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
