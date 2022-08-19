@@ -6,7 +6,12 @@
 // global scope, and execute the script.
 const { ethers, run, network } = require("hardhat");
 
-async function main() {}
+async function main() {
+  const Walletfactory = await ethers.getContractFactory("Allowance");
+  console.log("Deploying the smart contract.....");
+  const Wallet = await Walletfactory.deploy();
+  await Wallet.deployed();
+}
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
 main().catch((error) => {
