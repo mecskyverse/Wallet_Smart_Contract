@@ -1,5 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
-
+require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 const rinkebyUrl = process.env.rinkebyRpcUrl;
 const rinkebyKey = process.env.rinkebyPrivateKey;

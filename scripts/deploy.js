@@ -6,7 +6,7 @@
 // global scope, and execute the script.
 const { ethers, run, network } = require("hardhat");
 require("dotenv").config();
-
+console.log(process.evn);
 async function main() {
   const Walletfactory = await ethers.getContractFactory("Allowance");
   console.log("Deploying the smart contract.....");
