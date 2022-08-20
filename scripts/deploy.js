@@ -5,6 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const { ethers, run, network } = require("hardhat");
+require("dotenv").config();
 
 async function main() {
   const Walletfactory = await ethers.getContractFactory("Allowance");
