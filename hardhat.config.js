@@ -1,6 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
-/** @type import('hardhat/config').HardhatUserConfig */
+require("hardhat-gas-reporter");
+
 const rinkebyUrl = process.env.rinkebyRpcUrl;
 const rinkebyKey = process.env.rinkebyPrivateKey;
 module.exports = {
